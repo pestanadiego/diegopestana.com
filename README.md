@@ -1,2 +1,2 @@
-# diegopestana.com
-Portfolio built using Next.js
+# Diego Pestana's Portfolio
+Built using Next.js. Inspired by [@leerob](https://x.com/leeerob)
