@@ -37,7 +37,7 @@ export default function Home() {
         Diego Pestana
       </h1>
 
-      <p className="prose prose-neutral dark:prose-invert">
+      <p className="prose prose-neutral">
         I'm a {age}-year-old, curious, and ambitious systems engineer. I
         currently <Link href="/work">work</Link> at Venezolano de Crédito, where
         I serve as a senior software engineer for the online banking team. I'm

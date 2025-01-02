@@ -9,7 +9,7 @@ export default function WorkPage() {
       <h1 className="font-medium text-2xl mb-8 tracking-tighter">
         work experience
       </h1>
-      <div className="prose prose-neutral dark:prose-invert">
+      <div className="prose prose-neutral">
         <div>
           Here's a brief overview of my work experience. Please, check my{" "}
           <a href="work/resume.pdf" target="_blank">
@@ -18,16 +18,14 @@ export default function WorkPage() {
           for a comprehensive look at my technical skills, qualifications, and
           achievements.
         </div>
-        <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
+        <hr className="my-6 border-neutral-100" />
         <div className="flex justify-between items-center">
           <h2 className="font-medium text-xl mt-0 mb-1 tracking-tighter">
             Venezolano de Crédito
           </h2>
-          <p className="text-neutral-600 mb-0 dark:text-neutral-400 text-sm">
-            Aug 2023 – Present
-          </p>
+          <p className="text-neutral-600 mb-0 text-sm">Aug 2023 – Present</p>
         </div>
-        <p className="text-neutral-600 mt-0 dark:text-neutral-400 text-sm">
+        <p className="text-neutral-600 mt-0 text-sm">
           Senior Software Engineer
         </p>
         <ul>
@@ -58,16 +56,14 @@ export default function WorkPage() {
             increasing by <b>10%</b> the amount of daily P2P operations
           </li>
         </ul>
-        <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
+        <hr className="my-6 border-neutral-100" />
         <div className="flex justify-between items-center">
           <h2 className="font-medium text-xl mt-0 mb-1 tracking-tighter">
             Venezolano de Crédito
           </h2>
-          <p className="text-neutral-600 mb-0 dark:text-neutral-400 text-sm">
-            Jan 2023 – July 2023
-          </p>
+          <p className="text-neutral-600 mb-0 text-sm">Jan 2023 – July 2023</p>
         </div>
-        <p className="text-neutral-600 mt-0 dark:text-neutral-400 text-sm">
+        <p className="text-neutral-600 mt-0 text-sm">
           Junior Software Engineer
         </p>
         <ul>
@@ -88,16 +84,14 @@ export default function WorkPage() {
             to improve compatibility with modern frameworks
           </li>
         </ul>
-        <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
+        <hr className="my-6 border-neutral-100" />
         <div className="flex justify-between items-center">
           <h2 className="font-medium text-xl mt-0 mb-1 tracking-tighter">
             Venezolano de Crédito
           </h2>
-          <p className="text-neutral-600 mb-0 dark:text-neutral-400 text-sm">
-            Sept 2022 - Dec 2022
-          </p>
+          <p className="text-neutral-600 mb-0 text-sm">Sept 2022 - Dec 2022</p>
         </div>
-        <p className="text-neutral-600 mt-0 dark:text-neutral-400 text-sm">
+        <p className="text-neutral-600 mt-0 text-sm">
           Software Engineer Intern
         </p>
         <ul>
@@ -114,16 +108,14 @@ export default function WorkPage() {
             enhancing the reputation of the bank's web app
           </li>
         </ul>
-        <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
+        <hr className="my-6 border-neutral-100" />
         <div className="flex justify-between items-center">
           <h2 className="font-medium text-xl mt-0 mb-1 tracking-tighter">
             Universidad Metropolitana
           </h2>
-          <p className="text-neutral-600 mb-0 dark:text-neutral-400 text-sm">
-            Apr 2022 - Dec 2022
-          </p>
+          <p className="text-neutral-600 mb-0 text-sm">Apr 2022 - Dec 2022</p>
         </div>
-        <p className="text-neutral-600 mt-0 dark:text-neutral-400 text-sm">
+        <p className="text-neutral-600 mt-0 text-sm">
           Database Teaching Assistant
         </p>
         <ul>

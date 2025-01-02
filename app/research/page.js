@@ -23,14 +23,14 @@ export default function ResearchPage() {
   return (
     <section className="mb-8">
       <h1 className="font-medium text-2xl mb-8 tracking-tighter">research</h1>
-      <div className="prose prose-neutral dark:prose-invert">
+      <div className="prose prose-neutral">
         <p>
           So far, I've gained research experience by working on projects from my
           undergraduate thesis to extended abstracts. In the future, I plan to
           conduct research on making machine learning more trustworthy by
           ensuring it's fair and secure.
         </p>
-        <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
+        <hr className="my-6 border-neutral-100" />
         <ul>
           {Object.entries(papers).map(
             ([url, { title, type, organization, year }]) => {
