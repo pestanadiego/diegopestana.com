@@ -5,7 +5,7 @@ export const metadata = {
 
 const papers = {
   "/research/acla.pdf": {
-    title: "Automated Credit Limit Adjustment Model (ACLA)",
+    title: "Automating Credit Card Limit Adjustments Using Machine Learning",
     type: "Extended Abstract",
     organization: "Venezolano de Crédito",
     year: "2024",
