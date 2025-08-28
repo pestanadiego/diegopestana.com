@@ -1,7 +1,6 @@
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 
 export const metadata = {
@@ -18,7 +17,6 @@ export default function RootLayout({ children }) {
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
           <Navbar />
           {children}
-          <Footer />
         </main>
       </body>
     </html>

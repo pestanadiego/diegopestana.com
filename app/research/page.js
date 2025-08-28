@@ -4,7 +4,7 @@ export const metadata = {
 };
 
 const papers = {
-  "/research/acla.pdf": {
+  "https://arxiv.org/abs/2501.10451": {
     title: "Automating Credit Card Limit Adjustments Using Machine Learning",
     type: "Extended Abstract",
     organization: "Venezolano de Crédito",

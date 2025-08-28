@@ -38,12 +38,13 @@ export default function Home() {
       </h1>
 
       <p className="prose prose-neutral">
-        I'm a {age}-year-old, curious, and ambitious systems engineer. I
-        currently <Link href="/work">work</Link> at Venezolano de Crédito, where
-        I serve as a senior software engineer for the online banking team. I'm
-        an artificial intelligence (AI) and machine learning (ML) enthusiast,
-        and I'm conducting <Link href="/research">research</Link> on explainable
-        ML for the banking industry.
+        I'm a {age}-year-old, curious, and ambitious first-year Master of
+        Science in Computer Science student at the University of Kansas.
+        Previously, I <Link href="/work">served</Link> as a Senior Software
+        Engineer for Venezuela's largest corporate bank. I'm an artificial
+        intelligence (AI) and machine learning (ML) enthusiast, and I'm
+        conducting <Link href="/research">research</Link> on explainable ML for
+        the banking industry.
       </p>
       <div className="columns-2 sm:columns-3 gap-4 my-8">
         <div className="relative h-40 mb-4">
