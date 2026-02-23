@@ -5,11 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 import honors from "../public/home/honors.webp";
-import brooklyn from "../public/home/brooklyn.webp";
+import mit from "../public/home/mit.webp";
 import signing from "../public/home/signing.webp";
 import degree from "../public/home/degree.webp";
 import unimet from "../public/home/unimet.webp";
-import nyse from "../public/home/nyse.webp";
+import nyc from "../public/home/nyc.webp";
 
 export default function Home() {
   const [age, setAge] = useState(null);
@@ -40,11 +40,11 @@ export default function Home() {
       <p className="prose prose-neutral">
         I'm a {age}-year-old, curious, and ambitious first-year Master of
         Science in Computer Science student at the University of Kansas.
-        Previously, I <Link href="/work">served</Link> as a Senior Software
-        Engineer for Venezuela's largest corporate bank. I'm an artificial
-        intelligence (AI) and machine learning (ML) enthusiast, and I'm
-        conducting <Link href="/research">research</Link> on explainable ML for
-        the banking industry.
+        Previously, I <Link href="/work">served</Link> as a Software Engineer
+        for Venezuela's largest corporate bank. I'm an artificial intelligence
+        (AI) and machine learning (ML) enthusiast, and I'm conducting{" "}
+        <Link href="/research">research</Link> on explainable ML and data
+        mining.
       </p>
       <div className="columns-2 sm:columns-3 gap-4 my-8">
         <div className="relative h-40 mb-4">
@@ -59,8 +59,8 @@ export default function Home() {
         </div>
         <div className="relative h-80 mb-4 sm:mb-0">
           <Image
-            alt="Visiting the Brooklyn Bridge"
-            src={brooklyn}
+            alt="Visiting MIT's Stata Center"
+            src={mit}
             fill
             sizes="(max-width: 768px) 213px, 33vw"
             priority
@@ -99,8 +99,8 @@ export default function Home() {
         </div>
         <div className="relative h-80">
           <Image
-            alt="Visiting the New York Stock Exchange"
-            src={nyse}
+            alt="Visiting Hudson Yards with Enrique Areyan"
+            src={nyc}
             fill
             sizes="(min-width: 768px) 213px, 33vw"
             priority

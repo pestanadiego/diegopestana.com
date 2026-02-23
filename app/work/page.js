@@ -25,9 +25,7 @@ export default function WorkPage() {
           </h2>
           <p className="text-neutral-600 mb-0 text-sm">Aug 2023 – Jul 2025</p>
         </div>
-        <p className="text-neutral-600 mt-0 text-sm">
-          Senior Software Engineer
-        </p>
+        <p className="text-neutral-600 mt-0 text-sm">Software Engineer II</p>
         <ul>
           <li>
             Built a scalable RESTful API using <b>Java</b>, <b>Spring Boot</b>{" "}
@@ -66,9 +64,7 @@ export default function WorkPage() {
           </h2>
           <p className="text-neutral-600 mb-0 text-sm">Jan 2023 – July 2023</p>
         </div>
-        <p className="text-neutral-600 mt-0 text-sm">
-          Junior Software Engineer
-        </p>
+        <p className="text-neutral-600 mt-0 text-sm">Software Engineer I</p>
         <ul>
           <li>
             Optimized query execution times of an <b>Oracle</b> database

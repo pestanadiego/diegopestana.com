@@ -37,7 +37,7 @@ export function Navbar() {
             className="flex flex-row justify-between items-center px-0 pb-0 fade"
             id="nav"
           >
-            <div className="flex flex-row items-center space-x-0">
+            <div className="flex flex-row items-center space-x-2">
               {Object.entries(navItems).map(([path, { name }]) => (
                 <Link
                   key={path}
@@ -48,7 +48,7 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
-            <div className="flex flex-row items-center space-x-0">
+            <div className="flex flex-row items-center">
               <ul className="flex flex-row items-center space-x-4 font-sm hover:text-neutral-800">
                 {Object.entries(socialItems).map(([name, { link }]) => (
                   <li key={name}>

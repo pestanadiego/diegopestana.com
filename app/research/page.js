@@ -25,10 +25,29 @@ export default function ResearchPage() {
       <h1 className="font-medium text-2xl mb-8 tracking-tighter">research</h1>
       <div className="prose prose-neutral">
         <p>
-          So far, I've gained research experience by working on projects from my
-          undergraduate thesis to extended abstracts. In the future, I plan to
-          conduct research on making machine learning more trustworthy by
-          ensuring it's fair and secure.
+          My research focuses on <b>representation learning</b> for complex
+          time-series data, specifically electrocardiogram signals. I explore
+          multiple <b>self-supervised techniques</b>, such as contrastive
+          learning frameworks and joint-embedding predictive architectures, to
+          extract meaningful features from biological data. My goal is to create
+          rich and meaningful embeddings from vast amounts of unlabeled data,
+          which can be used as a foundation for downstream classification of{" "}
+          <b>cardiac anomalies</b>.
+        </p>
+        <p>
+          I also do research on <b>TinyML</b>. Currently, I'm addressing the
+          challenges of processing high-resolution data for{" "}
+          <b>defect detection</b> on edge devices, where memory and compute are
+          extremely constrained. Overcoming these hardware constraints is
+          crucial for low-latency applications, particularly in fields such as
+          drone imaging and retail logistics.
+        </p>
+        <p>
+          I'm interested in expanding current AI capabilities and research
+          methodologies. I'm actively exploring RL techniques to enhance{" "}
+          <b>LLM reasoning</b>. Additionally, as a hobby, I build{" "}
+          <b>agentic tools</b> that empower researchers and streamline research
+          workflows.
         </p>
         <hr className="my-6 border-neutral-100" />
         <ul>
@@ -47,7 +66,7 @@ export default function ResearchPage() {
                   </p>
                 </li>
               );
-            }
+            },
           )}
         </ul>
       </div>
