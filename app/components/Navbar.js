@@ -17,14 +17,17 @@ const navItems = {
 };
 
 const socialItems = {
-  email: {
-    link: "mailto:pestanadiegoalberto@gmail.com",
-  },
   linkedin: {
     link: "https://www.linkedin.com/in/diegopestana",
   },
   github: {
     link: "https://www.github.com/pestanadiego",
+  },
+  x: {
+    link: "https://x.com/diegopestana",
+  },
+  email: {
+    link: "mailto:pestanadiegoalberto@gmail.com",
   },
 };
 
