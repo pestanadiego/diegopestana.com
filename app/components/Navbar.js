@@ -57,7 +57,14 @@ export function Navbar() {
             <div className="flex flex-row items-center">
               <ul className="flex flex-row items-center space-x-4 font-sm hover:text-neutral-800">
                 {Object.entries(socialItems).map(([name, { link }]) => (
-                  <li key={name}>
+                  <li
+                    key={name}
+                    className={
+                      name === "linkedin" || name === "github"
+                        ? "hidden sm:block"
+                        : ""
+                    }
+                  >
                     <SocialLink name={name} link={link} />
                   </li>
                 ))}
