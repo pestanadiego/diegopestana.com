@@ -14,6 +14,9 @@ const navItems = {
   "/research": {
     name: "research",
   },
+  "/writings": {
+    name: "writings",
+  },
 };
 
 const socialItems = {
