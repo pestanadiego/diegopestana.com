@@ -18,21 +18,28 @@ async function TweetContent({ id }) {
     )
   }
 
-  return <EmbeddedTweet tweet={tweet} />
+  return <EmbeddedTweet tweet={normalizeTweet(tweet)} />
 }
 
 function isRealTweet(tweet) {
   if (!tweet || tweet.__typename !== 'Tweet') return false
-  if (typeof tweet.text !== 'string') return false
-  if (!Array.isArray(tweet.display_text_range)) return false
+  if (typeof tweet.display_text_range?.[0] !== 'number') return false
   if (!tweet.user || typeof tweet.user.name !== 'string') return false
-  const e = tweet.entities
-  if (!e) return false
-  if (!Array.isArray(e.hashtags)) return false
-  if (!Array.isArray(e.user_mentions)) return false
-  if (!Array.isArray(e.urls)) return false
-  if (!Array.isArray(e.symbols)) return false
   return true
+}
+
+function normalizeTweet(tweet) {
+  const e = tweet.entities ?? {}
+  return {
+    ...tweet,
+    entities: {
+      ...e,
+      hashtags: e.hashtags ?? [],
+      user_mentions: e.user_mentions ?? [],
+      urls: e.urls ?? [],
+      symbols: e.symbols ?? [],
+    },
+  }
 }
 
 export function TweetEmbed({ id }) {
