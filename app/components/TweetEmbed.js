@@ -26,6 +26,12 @@ function isRealTweet(tweet) {
   if (typeof tweet.text !== 'string') return false
   if (!Array.isArray(tweet.display_text_range)) return false
   if (!tweet.user || typeof tweet.user.name !== 'string') return false
+  const e = tweet.entities
+  if (!e) return false
+  if (!Array.isArray(e.hashtags)) return false
+  if (!Array.isArray(e.user_mentions)) return false
+  if (!Array.isArray(e.urls)) return false
+  if (!Array.isArray(e.symbols)) return false
   return true
 }
 
