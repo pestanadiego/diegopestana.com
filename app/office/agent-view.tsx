@@ -19,9 +19,11 @@ function AgentRow({ agent, updatedAt }: { agent: AgentActivity; updatedAt: strin
           {agent.status === "working" ? "working" : "idle"} · {formatElapsed(agent.updatedAt, updatedAt)}
         </span>
       </div>
-      <p className="truncate font-mono text-sm text-muted">
-        {agent.tool} {agent.target}
-      </p>
+      {agent.tool && (
+        <p className="truncate font-mono text-sm text-muted">
+          {agent.tool} {agent.target}
+        </p>
+      )}
     </li>
   );
 }
@@ -31,14 +33,28 @@ type AgentViewProps = {
   updatedAt?: string;
 };
 
-export function AgentView({ agents, updatedAt }: AgentViewProps) {
+export function AgentView({ agents = [], updatedAt }: AgentViewProps) {
+  const working = agents.filter(({ status }) => status === "working").length;
+  const sortedAgents = agents.toSorted(
+    (a, b) =>
+      Number(b.status === "working") - Number(a.status === "working") ||
+      Date.parse(b.updatedAt) - Date.parse(a.updatedAt),
+  );
+
   return (
     <Card>
-      <CardTitle>Realtime agent view</CardTitle>
+      <div className="flex items-baseline justify-between gap-4">
+        <CardTitle>Realtime agent view</CardTitle>
+        {agents.length > 0 && (
+          <CardDescription className="shrink-0">
+            {working} of {agents.length} working
+          </CardDescription>
+        )}
+      </div>
       <CardDescription>What my coding agents are doing right now. Paths and commands are obfuscated.</CardDescription>
-      {agents?.length && updatedAt ? (
+      {agents.length > 0 && updatedAt ? (
         <ul className="divide-y divide-divider">
-          {agents.map((agent) => (
+          {sortedAgents.map((agent) => (
             <AgentRow key={agent.id} agent={agent} updatedAt={updatedAt} />
           ))}
         </ul>

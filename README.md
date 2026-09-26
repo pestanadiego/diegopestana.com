@@ -7,9 +7,7 @@ See [DESIGN.md](DESIGN.md). `npm run lint` enforces it with [`@shadcn/lint`](htt
 
 ## Office page
 
-`/office` reads live data from the VPS. Set these environment variables:
+`/office` shows the VPS status and agent activity. The VPS pushes it to Upstash Redis and the site reads it with a read-only token. Set `OFFICE_DEMO=true` to replay the fixture in `app/office/demo.json` instead.
 
-- `OFFICE_API_URL`: a JSON endpoint that returns an `OfficeSnapshot` (see `app/office/snapshot.ts`)
-- `OFFICE_API_TOKEN`: sent as `Authorization: Bearer <token>`
-
-Without them the page renders its offline state.
+- Spec: [docs/office-api.md](docs/office-api.md)
+- Rollout plan: [docs/office-api-plan.md](docs/office-api-plan.md)

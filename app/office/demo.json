@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-09-26T00:00:00.000Z",
+  "health": {
+    "cpu": 12,
+    "memory": { "used": 5.4, "total": 16 },
+    "processes": 188,
+    "spec": [
+      { "label": "CPU", "value": "4 vCPU" },
+      { "label": "Memory", "value": "16 GB" },
+      { "label": "Disk", "value": "160 GB" },
+      { "label": "OS", "value": "Ubuntu 24.04 LTS" }
+    ]
+  },
+  "agents": [
+    {
+      "name": "claude-1",
+      "steps": [
+        { "tool": "Read", "target": "•••/••••/••••.tsx", "seconds": 6 },
+        { "tool": "Grep", "target": "••••••••", "seconds": 4 },
+        { "tool": "Edit", "target": "•••/••••/••••.tsx", "seconds": 18 },
+        { "tool": "Bash", "target": "••••••••", "seconds": 32 },
+        { "tool": "Edit", "target": "••••••••••/••/•••••.tsx", "seconds": 14 },
+        { "tool": "Bash", "target": "••••••••", "seconds": 41 }
+      ]
+    },
+    {
+      "name": "claude-2",
+      "steps": [
+        { "tool": "Agent", "target": "••••••••", "seconds": 55 },
+        { "tool": "Read", "target": "••••/••••••••.md", "seconds": 5 },
+        { "tool": "Write", "target": "••••/••••••••.md", "seconds": 24 },
+        { "tool": "Bash", "target": "••••••••", "seconds": 12 }
+      ]
+    },
+    {
+      "name": "claude-3",
+      "steps": [
+        { "tool": "Bash", "target": "••••••••", "seconds": 9 },
+        { "tool": "Read", "target": "•••/••••••.py", "seconds": 4 },
+        { "tool": "Edit", "target": "•••/••••••.py", "seconds": 16 },
+        { "tool": "Bash", "target": "••••••••", "seconds": 60 },
+        { "tool": "Read", "target": "••••/•••••••.log", "seconds": 7 }
+      ]
+    },
+    {
+      "name": "claude-4",
+      "steps": [
+        { "tool": "WebFetch", "target": "••••••••/••••••••", "seconds": 11 },
+        { "tool": "Write", "target": "••••••/••••••••.md", "seconds": 28 },
+        { "tool": "SendMessage", "target": "••••••••", "seconds": 8 }
+      ]
+    },
+    {
+      "name": "claude-5",
+      "steps": [
+        { "tool": "Glob", "target": "••••••••", "seconds": 3 },
+        { "tool": "Read", "target": "•••/•••/••••••••.sql", "seconds": 6 },
+        { "tool": "Bash", "target": "••••••••", "seconds": 22 },
+        { "tool": "Edit", "target": "•••/•••/••••••••.ts", "seconds": 19 }
+      ]
+    },
+    {
+      "name": "claude-6",
+      "steps": []
+    },
+    {
+      "name": "codex-1",
+      "steps": [
+        { "tool": "exec", "target": "••••••••", "seconds": 7 },
+        { "tool": "exec", "target": "••••••••", "seconds": 15 },
+        { "tool": "apply_patch", "target": "•••/•••••••/••••.rs", "seconds": 21 },
+        { "tool": "exec", "target": "••••••••", "seconds": 38 }
+      ]
+    },
+    {
+      "name": "codex-2",
+      "steps": [
+        { "tool": "exec", "target": "••••••••", "seconds": 5 },
+        { "tool": "apply_patch", "target": "••••••/•••••.go", "seconds": 26 },
+        { "tool": "exec", "target": "••••••••", "seconds": 44 }
+      ]
+    }
+  ],
+  "tokens": {
+    "month": "2026-09",
+    "daily": [
+      { "date": "2026-09-01", "tokens": 8400000 },
+      { "date": "2026-09-02", "tokens": 12100000 },
+      { "date": "2026-09-03", "tokens": 15600000 },
+      { "date": "2026-09-04", "tokens": 9800000 },
+      { "date": "2026-09-05", "tokens": 3200000 },
+      { "date": "2026-09-07", "tokens": 11400000 },
+      { "date": "2026-09-08", "tokens": 17300000 },
+      { "date": "2026-09-09", "tokens": 14200000 },
+      { "date": "2026-09-10", "tokens": 6900000 },
+      { "date": "2026-09-11", "tokens": 10500000 },
+      { "date": "2026-09-12", "tokens": 2100000 },
+      { "date": "2026-09-14", "tokens": 13800000 },
+      { "date": "2026-09-15", "tokens": 16200000 },
+      { "date": "2026-09-16", "tokens": 19400000 },
+      { "date": "2026-09-17", "tokens": 12700000 },
+      { "date": "2026-09-18", "tokens": 8100000 },
+      { "date": "2026-09-19", "tokens": 4600000 },
+      { "date": "2026-09-21", "tokens": 11900000 },
+      { "date": "2026-09-22", "tokens": 14800000 },
+      { "date": "2026-09-23", "tokens": 18600000 },
+      { "date": "2026-09-24", "tokens": 13100000 },
+      { "date": "2026-09-25", "tokens": 9700000 }
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Stat } from "@/components/ui/stat";
 
-import type { OfficeSnapshot } from "./snapshot";
+import type { TokenUsage as TokenUsageData } from "./snapshot";
 
 const chartHeight = 96;
 
@@ -9,7 +9,9 @@ const compact = new Intl.NumberFormat("en-US", { notation: "compact", maximumFra
 const dayFormat = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 const monthFormat = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
 
-function DailyChart({ daily, daysInMonth }: OfficeSnapshot["tokens"]) {
+function DailyChart({ month, daily }: TokenUsageData) {
+  const [year, monthNumber] = month.split("-").map(Number);
+  const daysInMonth = new Date(Date.UTC(year, monthNumber, 0)).getUTCDate();
   const peak = Math.max(...daily.map(({ tokens }) => tokens), 1);
   const slot = 100 / daysInMonth;
 
@@ -17,13 +19,14 @@ function DailyChart({ daily, daysInMonth }: OfficeSnapshot["tokens"]) {
     <figure className="flex flex-col gap-2 pt-4">
       <svg width="100%" height={chartHeight} aria-hidden="true" className="block">
         <line x1="0" x2="100%" y1={chartHeight - 0.5} y2={chartHeight - 0.5} className="stroke-border" />
-        {daily.map(({ date, tokens }, index) => {
+        {daily.map(({ date, tokens }) => {
+          const dayIndex = Number(date.slice(8, 10)) - 1;
           const height = (tokens / peak) * (chartHeight - 4);
           return (
             <g key={date} className="group">
-              <rect x={`${index * slot}%`} width={`${slot}%`} height={chartHeight} className="fill-transparent" />
+              <rect x={`${dayIndex * slot}%`} width={`${slot}%`} height={chartHeight} className="fill-transparent" />
               <rect
-                x={`${index * slot + slot * 0.15}%`}
+                x={`${dayIndex * slot + slot * 0.15}%`}
                 y={chartHeight - height}
                 width={`${slot * 0.7}%`}
                 height={height + 4}
@@ -36,8 +39,8 @@ function DailyChart({ daily, daysInMonth }: OfficeSnapshot["tokens"]) {
         })}
       </svg>
       <figcaption className="flex justify-between text-sm text-muted">
-        <span>{dayFormat.format(new Date(daily[0].date))}</span>
-        <span>{dayFormat.format(new Date(daily[daily.length - 1].date))}</span>
+        <span>{dayFormat.format(new Date(`${month}-01`))}</span>
+        <span>{dayFormat.format(new Date(Date.UTC(year, monthNumber - 1, daysInMonth)))}</span>
       </figcaption>
       <table className="sr-only">
         <caption>Tokens per day</caption>
@@ -54,10 +57,11 @@ function DailyChart({ daily, daysInMonth }: OfficeSnapshot["tokens"]) {
   );
 }
 
-export function TokenUsage({ tokens }: { tokens?: OfficeSnapshot["tokens"] }) {
-  const hasData = tokens && tokens.daily.length > 0;
+export function TokenUsage({ tokens }: { tokens?: TokenUsageData }) {
+  const lastDay = tokens?.daily.at(-1);
   const total = tokens?.daily.reduce((sum, day) => sum + day.tokens, 0) ?? 0;
-  const peakDay = tokens?.daily.reduce((peak, day) => (day.tokens > peak.tokens ? day : peak), tokens.daily[0]);
+  const peakDay = tokens?.daily.reduce<typeof lastDay>((peak, day) => (day.tokens > (peak?.tokens ?? -1) ? day : peak), undefined);
+  const daysElapsed = lastDay ? Number(lastDay.date.slice(8, 10)) : 1;
 
   return (
     <Card>
@@ -65,12 +69,12 @@ export function TokenUsage({ tokens }: { tokens?: OfficeSnapshot["tokens"] }) {
         <CardTitle>Monthly token consumption</CardTitle>
         {tokens && <CardDescription>{monthFormat.format(new Date(`${tokens.month}-01`))}</CardDescription>}
       </div>
-      {hasData ? (
+      {tokens && peakDay ? (
         <>
           <div className="grid grid-cols-3 gap-4 pt-2">
             <Stat label="Total" value={compact.format(total)} />
-            <Stat label="Daily average" value={compact.format(total / tokens.daily.length)} />
-            <Stat label="Peak day" value={peakDay ? compact.format(peakDay.tokens) : "–"} />
+            <Stat label="Daily average" value={compact.format(total / daysElapsed)} />
+            <Stat label="Peak day" value={compact.format(peakDay.tokens)} />
           </div>
           <DailyChart {...tokens} />
         </>

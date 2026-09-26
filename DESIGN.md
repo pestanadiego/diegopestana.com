@@ -159,10 +159,11 @@ Put post images in `public/writings/<slug>/`. Never style inside a post with JSX
 
 ### Office (live data)
 
-- A status line sits above the panels: a `size-2` dot (`bg-live` or `bg-faint`) plus a sentence that says the state in words.
+- A status line sits above the panels: a `size-2` dot (`bg-live` only when live, `bg-faint` for demo and offline) plus a sentence that says the state in words. Demo data is always labeled as a demo.
 - Each data group is one `Card`: `Health`, `Realtime agent view`, `Monthly token consumption`. Card header row: `CardTitle` left, a secondary control or period label right.
 - Every panel has an empty state written as a plain `CardDescription` sentence ("No usage recorded yet."). Never render zeros for missing data.
-- Anything from the agents that could reveal private work (paths, commands, prompts) is obfuscated on the server before it reaches the browser (`app/office/snapshot.ts`).
+- Anything from the agents that could reveal private work (paths, commands, prompts, project names) is obfuscated on the VPS before it is stored, and again on the server before it reaches the browser. See `docs/office-api.md`.
+- The agent list shows working agents first, then by recency, with a "N of M working" count in the header.
 - Relative times are computed from the snapshot's own timestamps, so the server and client render the same text.
 
 ### Charts

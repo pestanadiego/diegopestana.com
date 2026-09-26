@@ -1,3 +1,5 @@
+import { getDemoSnapshot } from "./demo";
+
 export type AgentActivity = {
   id: string;
   name: string;
@@ -7,21 +9,31 @@ export type AgentActivity = {
   updatedAt: string;
 };
 
-export type OfficeSnapshot = {
-  updatedAt: string;
-  health: {
-    cpu: number;
-    memory: { used: number; total: number };
-    processes: number;
-    spec: { label: string; value: string }[];
-  };
-  agents: AgentActivity[];
-  tokens: {
-    month: string;
-    daysInMonth: number;
-    daily: { date: string; tokens: number }[];
-  };
+type Health = {
+  cpu: number;
+  memory: { used: number; total: number };
+  processes: number;
+  spec: { label: string; value: string }[];
 };
+
+export type TokenUsage = {
+  month: string;
+  daily: { date: string; tokens: number }[];
+};
+
+export type OfficeSnapshot = {
+  source: "live" | "demo";
+  updatedAt: string;
+  health: Health;
+  agents: AgentActivity[];
+  tokens?: TokenUsage;
+};
+
+type HealthRecord = Health & { updatedAt: string };
+type AgentsRecord = { updatedAt: string; agents: AgentActivity[] };
+type TokensRecord = TokenUsage & { updatedAt: string };
+
+const keys = ["office:health", "office:agents", "office:tokens"];
 
 function obfuscate(target: string) {
   const segments = target.split("/");
@@ -34,24 +46,43 @@ function obfuscate(target: string) {
     .join("/");
 }
 
-export async function getOfficeSnapshot(): Promise<OfficeSnapshot | null> {
-  const url = process.env.OFFICE_API_URL;
-  if (!url) return null;
+function parse<T>(value: string | null): T | null {
+  return value ? JSON.parse(value) : null;
+}
+
+async function getLiveSnapshot(): Promise<OfficeSnapshot | null> {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_READ_ONLY_TOKEN;
+  if (!url || !token) return null;
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`${url}/mget/${keys.join("/")}`, {
       cache: "no-store",
-      headers: { Authorization: `Bearer ${process.env.OFFICE_API_TOKEN}` },
+      headers: { Authorization: `Bearer ${token}` },
       signal: AbortSignal.timeout(3000),
     });
     if (!response.ok) return null;
 
-    const snapshot: OfficeSnapshot = await response.json();
+    const { result }: { result: (string | null)[] } = await response.json();
+    const health = parse<HealthRecord>(result[0]);
+    const agents = parse<AgentsRecord>(result[1]);
+    const tokens = parse<TokensRecord>(result[2]);
+    if (!health) return null;
+
+    const { updatedAt, ...machine } = health;
     return {
-      ...snapshot,
-      agents: snapshot.agents.map((agent) => ({ ...agent, target: obfuscate(agent.target) })),
+      source: "live",
+      updatedAt,
+      health: machine,
+      agents: (agents?.agents ?? []).map((agent) => ({ ...agent, target: obfuscate(agent.target) })),
+      tokens: tokens ? { month: tokens.month, daily: tokens.daily } : undefined,
     };
   } catch {
     return null;
   }
+}
+
+export async function getOfficeSnapshot(): Promise<OfficeSnapshot | null> {
+  if (process.env.OFFICE_DEMO === "true") return getDemoSnapshot(Date.now());
+  return getLiveSnapshot();
 }
