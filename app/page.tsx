@@ -16,11 +16,6 @@ const projects = [
     description: "An iterative retrieval agent for multi-hop embedded system questions.",
     href: "https://github.com/pestanadiego/probe",
   },
-  {
-    name: "anti-youtube",
-    description: "Watch your favorite creators without getting hooked by the algorithm.",
-    href: "https://github.com/pestanadiego/anti-youtube",
-  },
 ];
 
 export default function HomePage() {
@@ -39,6 +34,9 @@ export default function HomePage() {
           </ListItem>
           <ListItem>I find AI/ML and agentic coding really cool</ListItem>
           <ListItem>In my free time, I swim</ListItem>
+          <ListItem>
+            Here's my <TextLink href="/work/resume.pdf">resume</TextLink>
+          </ListItem>
         </List>
       </div>
 

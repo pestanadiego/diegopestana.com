@@ -1,7 +1,6 @@
 import { Heading } from "@/components/ui/heading";
 import { List, ListItem } from "@/components/ui/list";
-import { Separator } from "@/components/ui/separator";
-import { Strong, Text } from "@/components/ui/text";
+import { Strong } from "@/components/ui/text";
 import { TextLink } from "@/components/ui/text-link";
 
 export const metadata = {
@@ -9,58 +8,29 @@ export const metadata = {
   description: "A brief summary of my research projects.",
 };
 
-const papers = [
-  {
-    href: "https://arxiv.org/abs/2501.10451",
-    title: "Automating Credit Card Limit Adjustments Using Machine Learning",
-    type: "Extended Abstract",
-    organization: "Venezolano de Crédito",
-    year: "2024",
-  },
-  {
-    href: "https://unimet.ent.sirsi.net/client/es_ES/default/search/detailnonmodal/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:134777/one",
-    title: "Venezolano de Crédito: desarrollo de la banca móvil corporativa",
-    type: "Undergraduate Thesis",
-    organization: "Universidad Metropolitana",
-    year: "2023",
-  },
-];
-
 export default function ResearchPage() {
   return (
     <section className="flex flex-col gap-8">
       <Heading level={1}>Research</Heading>
       <List>
         <ListItem>
-          <Strong>Representation learning</Strong> for electrocardiogram signals, using{" "}
-          <Strong>self-supervised</Strong> methods such as contrastive learning and joint-embedding
-          predictive architectures to classify <Strong>cardiac anomalies</Strong> from unlabeled data
+          <Strong>Trustworthy machine learning</Strong> for real-world clinical decision support, personalized
+          and transparent, with the{" "}
+          <TextLink href="https://ittc.ku.edu/~zyao/group/">Jayhawk Data Science Lab</TextLink> at KU
         </ListItem>
         <ListItem>
-          <Strong>TinyML</Strong> for high-resolution <Strong>defect detection</Strong> on edge devices
-          with tight memory and compute budgets, aimed at drone imaging and retail logistics
+          <Strong>LLMs over electronic health records</Strong>: prompt tuning that fuses structured EHR encoders
+          with language models, and reward-aligned clinical note summaries for outcome prediction
         </ListItem>
         <ListItem>
-          Reinforcement learning techniques to improve <Strong>LLM reasoning</Strong>
+          <Strong>Medical knowledge graphs</Strong> enriched and refined by LLMs under a budget, for personalized
+          medical concept representation
         </ListItem>
         <ListItem>
-          <Strong>Agentic tools</Strong> that streamline research workflows, built as a hobby
+          <Strong>Medication recommendation</Strong> for cold-start patients through user-adaptive meta-learning
+          with uncertainty filtering
         </ListItem>
       </List>
-      <Separator />
-      <div className="flex flex-col gap-4">
-        <Heading level={2}>Publications</Heading>
-        <ul className="flex flex-col gap-4">
-          {papers.map(({ href, title, type, organization, year }) => (
-            <li key={href} className="flex flex-col gap-1">
-              <TextLink href={href}>{title}</TextLink>
-              <Text variant="muted">
-                {type} · {organization}, {year}
-              </Text>
-            </li>
-          ))}
-        </ul>
-      </div>
     </section>
   );
 }

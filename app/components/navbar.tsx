@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { IconLink } from "@/components/ui/icon-link";
-import { GitHubIcon, LinkedInIcon, MailIcon, ResumeIcon, XIcon } from "@/components/ui/icons";
+import { GitHubIcon, LinkedInIcon, MailIcon, XIcon } from "@/components/ui/icons";
 
 const pages = [
   { href: "/", name: "home" },
@@ -14,7 +14,6 @@ const profiles = [
   { href: "https://www.github.com/pestanadiego", label: "GitHub", Icon: GitHubIcon },
   { href: "https://x.com/diegopestana", label: "X", Icon: XIcon },
   { href: "mailto:pestanadiegoalberto@gmail.com", label: "Email", Icon: MailIcon },
-  { href: "/work/resume.pdf", label: "Resume", Icon: ResumeIcon },
 ];
 
 export function Navbar() {
