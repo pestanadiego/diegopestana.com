@@ -107,5 +107,10 @@
       { "date": "2026-09-24", "tokens": 13100000 },
       { "date": "2026-09-25", "tokens": 9700000 }
     ]
-  }
+  },
+  "skills": [
+    { "name": "font-forge", "description": "Derives a custom typeface from an open-source chassis through rule-based rounds and reviews." },
+    { "name": "remote-compute", "description": "Stages code on a remote GPU box, launches the run in tmux, and collects the results." },
+    { "name": "no-ai-slop", "description": "Edits drafts into sharper, more human writing while keeping the writer's voice." }
+  ]
 }

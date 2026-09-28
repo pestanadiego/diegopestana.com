@@ -1,6 +1,6 @@
 # Office API
 
-How the `/office` page gets its data. The VPS pushes three JSON records into Upstash Redis; the site only reads them. The VPS never accepts inbound traffic from the site.
+How the `/office` page gets its data. The VPS pushes four JSON records into Upstash Redis; the site only reads them. The VPS never accepts inbound traffic from the site.
 
 ```
 VPS (Tailscale only)                     Vercel
@@ -34,6 +34,7 @@ All values are JSON strings. Every record carries `updatedAt` (ISO 8601, UTC) se
 | `office:health` | every 10 s | 30 s | The VPS or reporter is down. The page shows offline. |
 | `office:agents` | on agent activity (debounced 2 s), plus every 30 s | 120 s | No agent activity reported. The page shows "No agents running right now." |
 | `office:tokens` | every 15 min | 24 h | No usage recorded. The page shows "No usage recorded yet." |
+| `office:skills` | every 15 min | 24 h | No skills published. The page shows "No skills published yet." |
 
 ### `office:health`
 
@@ -103,7 +104,22 @@ All values are JSON strings. Every record carries `updatedAt` (ISO 8601, UTC) se
 | --- | --- | --- |
 | `month` | `YYYY-MM` | Current UTC month. |
 | `daily` | `{ date, tokens }[]` | Sorted by date, UTC days, only days with usage. |
-| `tokens` | integer | Claude Code: `input + output + cache_creation + cache_read` per assistant message, deduplicated by `message.id` + `requestId` (the `ccusage` total). Codex: sum of `token_count.info.last_token_usage.total_tokens`. |
+| `tokens` | integer | Claude Code: `input + output + cache_creation + cache_read` per assistant message, deduplicated by `message.id` + `requestId` (the `ccusage` total). Codex: sum of `token_count.info.last_token_usage.total_tokens`. Summed across the VPS and every host in `OFFICE_REMOTE_HOSTS` (SSH hosts the reporter queries with the same math). |
+
+### `office:skills`
+
+```json
+{
+  "updatedAt": "2026-09-28T14:00:00.000Z",
+  "skills": [
+    { "name": "no-ai-slop", "description": "Edit drafts into sharper, more human writing while preserving the writer's personal voice." }
+  ]
+}
+```
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `skills` | `{ name, description }[]` | One entry per directory in `~/.claude/skills` with a `SKILL.md` whose frontmatter has a `description`, sorted by name. `description` is the first sentence. Skills listed in `OFFICE_HIDDEN_SKILLS` on the VPS (comma-separated names in the reporter's `.env`) are left out. |
 
 ## Obfuscation
 
@@ -120,11 +136,11 @@ The reporter obfuscates before writing, so raw paths, commands, prompts, and pro
 `getOfficeSnapshot()` in `app/office/snapshot.ts`:
 
 ```http
-GET {KV_REST_API_URL}/mget/office:health/office:agents/office:tokens
+GET {KV_REST_API_URL}/mget/office:health/office:agents/office:tokens/office:skills
 Authorization: Bearer {KV_REST_API_READ_ONLY_TOKEN}
 ```
 
-Returns `{ "result": [healthJson | null, agentsJson | null, tokensJson | null] }`. A missing `office:health`, a non-2xx response, or a timeout over 3 s yields `null` (offline).
+Returns `{ "result": [healthJson | null, agentsJson | null, tokensJson | null, skillsJson | null] }`. A missing `office:health`, a non-2xx response, or a timeout over 3 s yields `null` (offline).
 
 `GET /api/office` returns the merged snapshot the page renders, or `null`:
 
@@ -135,6 +151,7 @@ type OfficeSnapshot = {
   health: { cpu: number; memory: { used: number; total: number }; processes: number; spec: { label: string; value: string }[] };
   agents: AgentActivity[]; // office:agents.agents, or []
   tokens?: { month: string; daily: { date: string; tokens: number }[] };
+  skills?: { name: string; description: string }[];
 };
 ```
 
@@ -150,7 +167,7 @@ curl -s "$KV_REST_API_URL/set/office:health?EX=30" \
 
 ## Demo fixture
 
-`app/office/demo.json` has the shape `{ recordedAt, health, agents: { name, steps: { tool, target, seconds }[] }[], tokens }`. `demo.ts` loops each agent through its steps with the recorded durations, then 45 s idle, offset per agent so they do not move in lockstep. Health wobbles around the recorded values based on how many agents are working.
+`app/office/demo.json` has the shape `{ recordedAt, health, agents: { name, steps: { tool, target, seconds }[] }[], tokens, skills }`. `demo.ts` loops each agent through its steps with the recorded durations, then 45 s idle, offset per agent so they do not move in lockstep. Health wobbles around the recorded values based on how many agents are working.
 
 The committed fixture is synthetic. To record the real sessions running on the VPS instead:
 

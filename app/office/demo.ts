@@ -45,5 +45,6 @@ export function getDemoSnapshot(now: number): OfficeSnapshot {
     },
     agents,
     tokens: recording.tokens,
+    skills: recording.skills,
   };
 }
